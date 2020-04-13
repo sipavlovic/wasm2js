@@ -22,7 +22,7 @@ wasm2js <wasm file> > <js file>
 Example
 -------
 
-Let's write trivial C program (example.c) just to ilustrate webassembly imports (print function) and exports (test function):
+Let's write trivial C++ program (example.cpp) just to ilustrate webassembly imports (print function) and exports (test function):
 
 ```
 void print();
@@ -32,8 +32,9 @@ void test() {
 }
 ```
 
-We can compile that online at WasmExplorer: https://mbebenita.github.io/WasmExplorer/ and get:
+We can compile that online at WasmExplorer: https://mbebenita.github.io/WasmExplorer/ and get web assebly code:
 
+```
 (module
  (type $FUNCSIG$v (func))
  (import "env" "_Z5printv" (func $_Z5printv))
@@ -45,19 +46,29 @@ We can compile that online at WasmExplorer: https://mbebenita.github.io/WasmExpl
   (call $_Z5printv)
  )
 )
+```
 
 And after than download .wasm compiled as explorer.wasm file.
 
-Running wasm2js example.wasm gives javascript code:
+Running 
 
+```
+wasm2js example.wasm 
+```
+
+gives javascript code:
+
+```
 const wasm_strbuffer = atob(AGFzbQEAAAABhICAgAABYAAAApGAgIAAAQNlbnYJX1o1cHJpbnR2AAADgoCAgAABAASEgICAAAFwAAAFg4CAgAABAAEGgYCAgAAAB5WAgIAAAgZtZW1vcnkCAAhfWjR0ZXN0dgABCoqAgIAAAYSAgIAAABAACw==);
 wasm_codearray = new Uint8Array(wasm_strbuffer.length);
 for (var i in wasm_strbuffer) wasm_codearray[i] = wasm_strbuffer.charCodeAt(i);
+```
 
 So now in wasm_codearray variable we have compiled wasm code ready to be used in WebAssembly.
 
 Because compiled C++ code adds prefix and suffix to function names (as can be seen from webassembly source) we now have "_Z5printv" instead of "print" and "_Z4testv" instead of "test". So .html file to run it all looks like:
 
+```
 <!DOCTYPE HTML>
 <HTML>
 <script src="example.js"></script>
@@ -73,7 +84,7 @@ WebAssembly.instantiate(wasm_codearray, {"env":imports})
 </script>
 </BODY>
 </HTML>
-
+```
 
 
 Dependencies
@@ -81,13 +92,9 @@ Dependencies
 I've used slightly modified code https://github.com/mvorbrodt/blog/blob/master/src/base64.hpp for base64 encoding/decoding.
 
 
-
-
 Requirements
 ------------
 C++14 Compiler
-
-
 
 
 License
