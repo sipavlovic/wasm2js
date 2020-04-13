@@ -24,11 +24,13 @@ Example
 
 Let's write trivial C program (example.c) just to ilustrate webassembly imports (print function) and exports (test function):
 
+```
 void print();
 
 void test() {
 	print();
 }
+```
 
 We can compile that online at WasmExplorer: https://mbebenita.github.io/WasmExplorer/ and get:
 
