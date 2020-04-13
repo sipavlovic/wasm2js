@@ -7,19 +7,17 @@ General Info
 
 This tool transform .wasm file to base64 encoding wrapped into javascript code, so that it can be used in a local .html file without the need for fetch() or any client server communication.
 
-```
-Usage: wasm2js <wasm file>
-```
-
 This command prints javascript wrapping code and base64 encoded wasm code
 
-```sh
+```
 wasm2js <wasm file>
 ```
 
 This command saves javascript wrapping code + base64 encoded wasm code into javascript file
-wasm2js <wasm file> > <js file>
 
+```
+wasm2js <wasm file> > <js file>
+```
 
 Example
 -------
