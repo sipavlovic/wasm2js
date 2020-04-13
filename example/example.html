@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<HTML>
+<script src="example.js"></script>
+<body>
+<h1>WASM TEST</H1>
+<script>
+
+imports = {};
+imports["_Z5printv"] = () => { alert("Javascript code for C++ function print()"); } // imported function print()
+WebAssembly.instantiate(wasm_codearray, {"env":imports})
+	.then (obj => { obj.instance.exports._Z4testv(); }); // exported function test()
+
+</script>
+</BODY>
+</HTML>
